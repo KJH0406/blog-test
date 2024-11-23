@@ -1,12 +1,13 @@
 import type { Config } from 'tailwindcss'
 
-const tailwindConfig: Config = {
+const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: { lg: '780px' },
     extend: {
       colors: {
         background: 'var(--background)',
@@ -17,4 +18,4 @@ const tailwindConfig: Config = {
   plugins: [],
 }
 
-export default tailwindConfig
+export default config
