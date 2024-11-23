@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { AiFillGithub, AiFillInstagram, AiOutlineClose } from 'react-icons/ai'
+import IconButton from './IconButton'
 
 type SidebarProps = {
   close: () => void
@@ -14,7 +15,7 @@ const Sidebar = ({ close, isOpen }: SidebarProps) => {
       }`}
     >
       <div className="flex justify-end lg:hidden">
-        <AiOutlineClose className="h-5 w-5" onClick={close} />
+        <IconButton Icon={AiOutlineClose} onClick={close} />
       </div>
       <Link href="/" className="w-48 font-medium text-gray-600 hover:underline">
         홈
@@ -32,12 +33,18 @@ const Sidebar = ({ close, isOpen }: SidebarProps) => {
         Web Development
       </Link>
       <div className="mt-10 flex items-center gap-4">
-        <Link href="https://www.instagram.com/_djangho" target="_blank">
-          <AiFillInstagram className="h-6 w-6" />
-        </Link>
-        <Link href="https://www.github.com/KJH0406" target="_blank">
-          <AiFillGithub className="h-6 w-6" />
-        </Link>
+        <IconButton
+          Icon={AiFillInstagram}
+          component={Link}
+          href="https://www.instagram.com/_djangho"
+          target="_blank"
+        />
+        <IconButton
+          Icon={AiFillGithub}
+          component={Link}
+          href="https://www.github.com/KJH0406"
+          target="_blank"
+        />
       </div>
     </div>
   )
