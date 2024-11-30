@@ -9,6 +9,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Post>,
 ) {
+  if (req.method !== 'POST') {
+    res.status(405).end()
+    return
+  }
+
   const form = formidable()
 
   const [fields, files] = await form.parse(req)
@@ -20,13 +25,15 @@ export default async function handler(
   if (files.preview_image?.length === 1) {
     const file = files.preview_image[0]
     const fileContent = await readFileSync(file.filepath)
-    const filename = `${file.newFilename}_${file.originalFilename}`
+    const fileName = `${file.newFilename}`
     const { data: uploadData, error } = await supabase.storage
       .from('blog-image')
-      .upload(filename, fileContent, {
+      .upload(fileName, fileContent, {
         contentType: file.mimetype ?? undefined,
       })
     if (error) {
+      console.log(error)
+
       res.status(403).end()
     }
 
